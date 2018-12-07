@@ -12,6 +12,7 @@
     </v-toolbar>
 
     <v-content>
+      {{clientId}}
       <router-view></router-view>
     </v-content>
 
@@ -28,8 +29,11 @@ export default {
   },
   data () {
     return {
-      //
+      clientId: process.env.VUE_APP_AUTH0_CONFIG_DOMAIN
     }
+  },
+  beforeCreate(){
+
   }
 }
 </script>
