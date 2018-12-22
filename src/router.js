@@ -35,7 +35,8 @@ export default new Router({
     {
       path: '/members',
       name: 'members',
-      component: Members
+      component: Members,
+      meta: { requiresAuth: true }
     },
   ]
 })
