@@ -5,7 +5,6 @@ import About from './views/About.vue'
 import Contact from './views/Contact.vue'
 import Members from './views/Members.vue'
 import Login from './views/Login.vue'
-import store from './store';
 
 Vue.use(Router)
 
@@ -26,8 +25,7 @@ const router = new Router({
     {
       path: '/contact',
       name: 'contact',
-      component: Contact,
-      meta: { requiresAuth: true }
+      component: Contact
     },
     {
       path: '/login',
@@ -43,29 +41,26 @@ const router = new Router({
   ]
 });
 
-router.beforeEach( (to,from,next) => {
-  
-  let routerAuthCheck = true;  // TODO: finish later
+router.beforeEach( (to,from,next)=>{
+  let routerAuthCheck = true;  //TODO: add actual check
 
-  if( to.matched.some(record => record.meta.requiresAuth)){
-    // check for authorization
-    if (routerAuthCheck){
-      //store.commit('setuserIsAuthenticated', true);  //TOTO: finish later
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // Check if user is Authenticated
+    if(routerAuthCheck){
+      // user is Authenticated
+      // TODO: commmit to Store that the user is authenticated
       next();
     }
-    // not authorized
     else{
+      // user is not authenticated
       router.replace('/login');
     }
+    
   }
+  // Allow page to load 
   else{
-    //  No Authorization Required
-    //  allow page loade
     next();
   }
-
 });
 
 export default router;
-
-
