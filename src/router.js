@@ -5,6 +5,7 @@ import About from './views/About.vue'
 import Contact from './views/Contact.vue'
 import Members from './views/Members.vue'
 import Login from './views/Login.vue'
+import Store from './store'
 
 Vue.use(Router)
 
@@ -42,13 +43,16 @@ const router = new Router({
 });
 
 router.beforeEach( (to,from,next)=>{
-  let routerAuthCheck = true;  //TODO: add actual check
-
+  let routerAuthCheck = false;  //TODO: add actual check
+  if (routerAuthCheck)
+  {
+//    Store.state.userIsAuthorized = true;  // don't do this!
+    Store.commit('setUserIsAuthenticated', true);
+  }
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // Check if user is Authenticated
     if(routerAuthCheck){
       // user is Authenticated
-      // TODO: commmit to Store that the user is authenticated
       next();
     }
     else{

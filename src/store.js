@@ -8,7 +8,9 @@ export default new Vuex.Store({
     userIsAuthorized:false,
   },
   mutations: {
-
+    setUserIsAuthenticated(state, replacement){
+      state.userIsAuthorized = replacement;
+    }
   },
   actions: {
 
