@@ -9,11 +9,16 @@ export default new Vuex.Store({
   state: {
     userIsAuthorized:false,
     auth0: new auth0.WebAuth({
-      domain: "vuejs-auth0.auth0.com", 
-      clientID: "ArhqWZ5uzU_pKTHmcBMId9DlZcoSgYQr",
-      redirectUri: 'http://localhost:8080/auth0callback',  
-      responseType: "token id_token",
-      scope: "openid profile email",
+      domain: process.env.VUE_APP_AUTH0_CONFIG_DOMAIN, 
+      clientID: process.env.VUE_APP_AUTH0_CONFIG_CLIENTID,
+      redirectUri: process.env.VUE_APP_DOMAINURL + '/auth0callback',  
+      responseType: process.env.VUE_APP_AUTH0_CONFIG_RESPONSETYPE,
+      scope: process.env.VUE_APP_AUTH0_CONFIG_SCOPE,
+      // domain: "vuejs-auth0.auth0.com", 
+      // clientID: "ArhqWZ5uzU_pKTHmcBMId9DlZcoSgYQr",
+      // redirectUri: 'http://localhost:8080/auth0callback',  
+      // responseType: "token id_token",
+      // scope: "openid profile email",      
     }),
   },
   mutations: {
@@ -55,7 +60,7 @@ export default new Vuex.Store({
       this.userProfile = null;
 
       // redirect to auth0 logout to completely log the user out
-      window.location.href = "https://vuejs-auth0.auth0.com/v2/logout?returnTo=http://localhost:8080/login&client_id=ArhqWZ5uzU_pKTHmcBMId9DlZcoSgYQr"; // TODO - set in environment variables
+      window.location.href = process.env.VUE_APP_AUTH0_CONFIG_DOMAINURL + "/v2/logout?returnTo=" + process.env.VUE_APP_DOMAINURL + "/login&client_id=" + process.env.VUE_APP_AUTH0_CONFIG_CLIENTID; // TODO - set in environment variables
     },
 
   }
