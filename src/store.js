@@ -14,11 +14,6 @@ export default new Vuex.Store({
       redirectUri: process.env.VUE_APP_DOMAINURL + '/auth0callback',  
       responseType: process.env.VUE_APP_AUTH0_CONFIG_RESPONSETYPE,
       scope: process.env.VUE_APP_AUTH0_CONFIG_SCOPE,
-      // domain: "vuejs-auth0.auth0.com", 
-      // clientID: "ArhqWZ5uzU_pKTHmcBMId9DlZcoSgYQr",
-      // redirectUri: 'http://localhost:8080/auth0callback',  
-      // responseType: "token id_token",
-      // scope: "openid profile email",      
     }),
   },
   mutations: {
