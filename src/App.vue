@@ -35,6 +35,7 @@ export default {
   },
   methods:{
     logout(){
+      this.$store.dispatch('auth0Logout');
       console.log('logging out');
     }
   },

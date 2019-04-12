@@ -37,7 +37,7 @@ export default new Vuex.Store({
           localStorage.setItem('id_token', authResult.idToken);
           localStorage.setItem('expires_at', expiresAt);  
 
-          router.replace('dashboard');
+          router.replace('/');
         } 
         else if (err) {
           alert('login failed. Error #KJN838');
@@ -45,6 +45,17 @@ export default new Vuex.Store({
           console.log(err);
         }
       })
+    },
+    auth0Logout (context) {
+      // No need to update the bearer in global axiosConfig to null because we are redirecting out of the application
+      // Clear Access Token and ID Token from local storage
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+      this.userProfile = null;
+
+      // redirect to auth0 logout to completely log the user out
+      window.location.href = "https://vuejs-auth0.auth0.com/v2/logout?returnTo=http://localhost:8080/login&client_id=ArhqWZ5uzU_pKTHmcBMId9DlZcoSgYQr"; // TODO - set in environment variables
     },
 
   }
