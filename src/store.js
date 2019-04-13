@@ -46,5 +46,15 @@ export default new Vuex.Store({
         }
       })
     },
+    auth0Logout (context) {
+      // No need to update the bearer in global axiosConfig to null because we are redirecting out of the application
+      // Clear Access Token and ID Token from local storage
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+
+      // redirect to auth0 logout to completely log the user out
+      window.location.href = process.env.VUE_APP_AUTH0_CONFIG_DOMAINURL + "/v2/logout?returnTo=" + process.env.VUE_APP_DOMAINURL + "/login&client_id=" + process.env.VUE_APP_AUTH0_CONFIG_CLIENTID; 
+    },    
   }
 })

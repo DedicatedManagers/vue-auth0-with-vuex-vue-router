@@ -32,7 +32,8 @@ const router = new Router({
     {
       path: '/contact',
       name: 'contact',
-      component: Contact
+      component: Contact,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -67,26 +68,24 @@ router.beforeEach( (to,from,next)=>{
    routerAuthCheck = new Date().getTime() < expiresAt;  
  }
 
-  if (routerAuthCheck)
-  {
-//    Store.state.userIsAuthorized = true;  // don't do this!
-    Store.commit('setUserIsAuthenticated', true);
-  }
+  // set global ui understanding of authentication
+  Store.commit('setUserIsAuthenticated', routerAuthCheck); 
+
+  // check if the route to be accessed requires authorizaton
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // Check if user is Authenticated
     if(routerAuthCheck){
-      // user is Authenticated
+      // user is Authenticated - allow access
       next();
     }
     else{
-      // user is not authenticated
+      // user is not authenticated - redirect to login
       router.replace('/login');
     }
     
   }
   // Allow page to load 
   else{
-    Store.commit('setUserIsAuthenticated', false);
     next();
   }
 });
