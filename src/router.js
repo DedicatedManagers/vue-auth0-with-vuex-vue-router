@@ -33,7 +33,6 @@ const router = new Router({
       path: '/contact',
       name: 'contact',
       component: Contact,
-      meta: { requiresAuth: true }
     },
     {
       path: '/login',
