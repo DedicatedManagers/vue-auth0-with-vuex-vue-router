@@ -7,8 +7,6 @@ import Members from './views/Members.vue'
 import Auth0Callback from './views/Auth0Callback.vue'
 import Login from './views/Login.vue'
 import Store from './store'
-import Auth0Callback from './views/Auth0Callback.vue'
-
 
 Vue.use(Router)
 

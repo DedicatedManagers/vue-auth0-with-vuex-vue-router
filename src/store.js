@@ -19,7 +19,7 @@ export default new Vuex.Store({
   mutations: {
     setUserIsAuthenticated(state, replacement){
       state.userIsAuthorized = replacement;
-    },
+    }
 
   },
   actions: {
